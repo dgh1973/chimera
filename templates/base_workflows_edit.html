@@ -1,0 +1,19 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit Workflow{% endblock %}
+{% block right_title %}<a href="/chimera/workflows/">Workflows</a>&nbsp&gt&nbsp{{ workflow|safe }}{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/workflows/submit/{{ workflow.id }}/">
+        <input type="submit" value="Save" />
+        <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/workflows/delete/{{ workflow.id }}/'" />
+        <input type="button" value="View Stages" onClick="DoNav('/chimera/workflows/viewstages/{{ workflow.id }}/')" />
+        <p>
+            <hr>
+            <table id="box-table">
+            {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}

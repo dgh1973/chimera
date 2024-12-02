@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Workflows{% endblock %}
+{%block right_title %}
+{% if qs %}
+    Workflows with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    Workflows ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/workflows/search/">
+            <input type="text" name="search"/>
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/workflows/new/">
+            <input type="submit" value="New Workflow" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+    <table id="minimal-table">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Stages</th>
+            <th>Enabled</th>
+        </tr>
+    {% for workflow in list %}
+        <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+            onclick="DoNav('/chimera/workflows/viewstages/{{ workflow.id }}');">
+            <td>{{ workflow.name|safe }}</td>
+            <td>{{ workflow.description|safe }}</td>
+            <td>{{ workflow.workflowstage_set.count }}</td>
+        {% if workflow.enabled %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base_view.html" %}
+{% block title %}{{ server|safe }}{% endblock %}
+{% block right_title %}<a href="/chimera/servers/">Servers</a>&nbsp&gt&nbsp{{ server|safe }}{% endblock %}
+{% block top_right_table %}
+<button onClick="DoNav('/chimera/servers/edit/{{ server.id }}/')">
+    Edit
+</button>
+<button onClick="DoNav('/chimera/serverenv/view/{{ server.id }}/')">
+    View Environment
+</button>
+<button onClick="location.href='{{ proto }}{{ server.address }}/'">
+    Login
+</button>
+{% endblock %}
+{% block bottom_right_content %}
+<table id="info-table">
+    <tr>
+        <td class="title">NAME</td>
+        <td>{{ server.name|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">INTERNAL ADDRESS</td>
+        <td>{{ server.address|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">EXTERNAL ADDRESS</td>
+        <td>{{ server.e_addr|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LB ADDRESS</td>
+        <td>{{ server.v_addr|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DOB</td>
+        <td>{{ server.dob|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">FUNCTION</td>
+        <td>{{ server.get_function_display|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESCRIPTION</td>
+        <td>{{ server.description|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">UPDATED</td>
+        <td>{{ server.updated|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LOCATION</td>
+        <td>{{ server.loc_dc|safe }}:{{ server.loc_row|safe }}/{{ server.loc_rack|safe }}/{{ server.loc_shelf|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">SWITCH PORT</td>
+        <td>{{ server.switch_port|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">OPERATING SYSTEM</td>
+        <td>{{ server.get_os_display|safe }} ({{ server.os|safe }})</td>
+    </tr>
+    <tr>
+        <td class="title">CPU SPEED (# OF CORES)</td>
+        <td>{{ server.cpu_speed }} ({{ server.cpu_cores }})</td>
+    </tr>
+    <tr>
+        <td class="title">RAM</td>
+        <td>{{ server.ram }}</td>
+    </tr>
+    <tr>
+        <td class="title">MAKE & MODEL</td>
+        <td>{{ server.make_model }}</td>
+    </tr>
+    <tr>
+        <td class="title">SERIAL</td>
+        <td>{{ server.serial }}</td>
+    </tr>
+    <tr>
+        <td class="title">ENABLED</td>
+        <td>{{ server.enabled }}</td>
+    </tr>
+</table>
+{% endblock %}

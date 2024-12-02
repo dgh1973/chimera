@@ -1,0 +1,19 @@
+################################################################################
+# Handle ssh-agent startup and access on login
+################################################################################
+agentfile="${HOME}/.ssh/.ssh_agent"
+if ps aux | grep -v grep | grep -q ssh-agent ; then
+    if [ -f ${agentfile} ] ; then
+        . ${agentfile}
+    else
+        agent_pid=$(ps aux | grep -v grep | grep ssh-agent | awk '{print $1}')
+        kill ${agent_pid}
+        ssh-agent | head -2 > ${agentfile}
+        . ${agentfile}
+        ssh-add
+    fi
+else
+    ssh-agent | head -2 > ${agentfile}
+    . ${agentfile}
+    ssh-add
+fi

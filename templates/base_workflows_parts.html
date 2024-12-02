@@ -1,0 +1,48 @@
+{% extends "base_workflows.html" %}
+{% block title %}Workflow Parts{% endblock %}
+{%block right_title %}
+{% if qs %}
+    Workflow Parts with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    Workflow Parts ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/workflows/searchpart/">
+            <input type="text" name="search"/>
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/workflows/newpart/">
+            <input type="submit" value="New Workflow Part" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+    <table id="minimal-table">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Object</th>
+            <th>Pipe</th>
+        </tr>
+    {% for workflowpart in list %}
+        <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+            onclick="DoNav('/chimera/workflows/editpart/{{ workflowpart.id }}');">
+            <td>{{ workflowpart.name }}</td>
+            <td>{{ workflowpart.desc }}</td>
+            <td>{{ workflowpart.object }}</td>
+        {% if workflowpart.pipe %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

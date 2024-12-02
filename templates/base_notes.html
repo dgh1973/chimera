@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Notes{% endblock %}
+{% block right_title %}
+{% if qs %}
+    Notes with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    Notes ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/notes/search/">
+            <input type="text" name="search"/>
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/notes/new/">
+            <input type="submit" value="New Note" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+    <table id="minimal-table">
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+        </tr>
+    {% for note in list %}
+        <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+            onclick="DoNav('/chimera/notes/view/{{ note.id }}/')">
+            <td>{{ note.title|safe }}</td>
+            <td>{{ note.date }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

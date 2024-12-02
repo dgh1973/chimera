@@ -1,0 +1,10 @@
+{% extends "base_view.html" %}
+{% block right_title %}<a href="/chimera/files/">Files</a>&nbsp&gt&nbsp{{ file|safe }}{% endblock %}
+{% block top_right_table %}
+<button onClick="DoNav('/chimera/files/edit/{{ file.id }}/')">
+    Edit
+</button>
+{% endblock %}
+{% block bottom_right_content %}
+    <pre>{{ file.content }}</pre>
+{% endblock %}

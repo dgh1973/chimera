@@ -1,0 +1,69 @@
+{% extends "base_workflows.html" %}
+{% block title %}{{ w|safe }} Stages{% endblock %}
+{%block right_title %}
+{% if qs %}
+    <a href="/chimera/workflows/">Workflows</a>&nbsp&gt&nbsp{{ w|safe }} Stages with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    <a href="/chimera/workflows/">Workflows</a>&nbsp&gt&nbsp{{ w|safe }} Stages ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/workflows/searchstage/">
+            <input type="text" name="search"/>
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+        <td>
+        <form method="post" action="/chimera/workflows/edit/{{ wid }}/">
+            <input type="submit" value="Edit Workflow" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/workflows/newstage/{{ wid }}/">
+            <input type="submit" value="New Workflow Stage" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+<table id="minimal-table">
+    <tr>
+        <th>Stage</th>
+        <th>Part</th>
+        <th>Args</th>
+        <th>Server</th>
+        <th>Run As</th>
+        <th>EoF</th>
+        <th>Enabled</th>
+    </tr>
+{% for workflowstage in list %}
+    <tr onmouseover="ChangeColor(this, '#CDF', true);"
+      onmouseout="ChangeColor(this, '#FFF', false);"
+        onclick="DoNav('/chimera/workflows/editstage/{{ workflowstage.id }}/');">
+        <td>{{ workflowstage.stage|safe }}</td>
+        <td>{{ workflowstage.part|safe }}</td>
+        <td>{{ workflowstage.args|safe }}</td>
+        <td>
+            {% if workflowstage.server %}
+                {{ workflowstage.server|safe }}
+            {% else %}
+                {{ workflowstage.server|safe }}
+            {% endif %}
+        </td>
+        <td>{{ workflowstage.runas|safe }}</td>
+        {% if workflowstage.eof %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+        {% if workflowstage.enabled %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

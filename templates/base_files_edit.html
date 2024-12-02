@@ -1,0 +1,18 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit File{% endblock %}
+{% block right_title %}<a href="/chimera/files/">Files</a>&nbsp&gt&nbsp{{ file|safe }}{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/files/submit/{{ file.id }}/">
+        <input type="submit" value="Save" />
+        <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/files/delete/{{ file.id }}/'" />
+        <p>
+            <hr>
+            <table id="box-table">
+                {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}

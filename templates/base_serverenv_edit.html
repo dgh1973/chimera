@@ -1,0 +1,18 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit Server{% endblock %}
+{% block right_title %}<a href="/chimera/serverenv/">Server Environment Variables</a>{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/serverenv/submit/{{ env.id }}/">
+        <input type="submit" value="Save" />
+        <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/serverenv/delete/{{ env.id }}/'" />
+        <p>
+            <hr>
+            <table id="box-table">
+                {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}

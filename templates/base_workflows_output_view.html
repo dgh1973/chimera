@@ -1,0 +1,56 @@
+{% extends "base_view.html" %}
+{% block right_title %}<a href="/chimera/workflows/output/">Workflow Outputs</a>&nbsp&gt&nbsp{{ wfo|safe }}{% endblock %}
+{% block top_right_table %}
+<tr class="util-link">
+    {% if wfo.get_previous_by_date.id %}
+        <td><a href="/chimera/workflows/viewoutput/{{ wfo.get_previous_by_date.id }}">Prev</a></td>
+    {% else %}
+        <td>Prev</td>
+    {% endif %}
+    {% if wfo.get_next_by_date.id %}
+        <td><a href="/chimera/workflows/viewoutput/{{ wfo.get_next_by_date.id }}">Next</a></td>
+    {% else %}
+        <td>Next</td>
+    {% endif %}
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+<table id="info-table">
+    <tr>
+        <td class="title">SERVER</td>
+        <td><a href='/chimera/servers/view/{{ wfo.server.id }}'>{{ wfo.server|safe }}</a></td>
+    </tr>
+    <tr>
+        <td class="title">WORKFLOW STAGE</td>
+        <td><a href='/chimera/workflows/editstage/{{ wfo.stage.id }}'>{{ wfo.stage|safe }}</a></td>
+    </tr>
+    <tr>
+        <td class="title">DATE</td>
+        <td>{{ wfo.date|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">COMMAND</td>
+        <td>{{ wfo.part_args|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">RETVAL</td>
+        <td>{{ wfo.retval|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">STDIN</td>
+        <td><pre>{{ wfo.stdin }}</pre></td>
+    </tr>
+    <tr>
+        <td class="title">STDOUT</td>
+        <td><pre>{{ wfo.stdout }}</pre></td>
+    </tr>
+    <tr>
+        <td class="title">STDERR</td>
+        <td><pre>{{ wfo.stderr }}</pre></td>
+    </tr>
+</table>
+<!-- <p class="util-link">
+    <a href="/chimera/workflows/graphserveroutput/{{ wfo.id }}/">daily server graph</a>
+    <a href="/chimera/workflows/graphstageoutput/{{ wfo.id }}/">daily stage graph</a>
+</p> -->
+{% endblock %}

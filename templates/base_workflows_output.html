@@ -1,0 +1,46 @@
+{% extends "base_workflows_refresh.html" %}
+{% block title %}Workflow Outputs{% endblock %}
+{% block right_title %}
+{% if qs %}
+    Workflow Outputs with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    Workflow Outputs ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="GET" action="/chimera/workflows/searchoutput/">
+            <input type="text" name="search"
+            title="Use operators like server, workflow, or date followed by ':'" />
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+    <table id="minimal-table">
+        <tr>
+            <th>Server</th>
+            <th>Stage</th>
+            <th>STDOUT</th>
+            <th>STDERR</th>
+            <th>STDIN</th>
+            <th>Retval</th>
+            <th>Date</th>
+        </tr>
+    {% for workflowoutput in list %}
+        <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+            onclick="DoNav('/chimera/workflows/viewoutput/{{ workflowoutput.id }}/')">
+            <td>{{ workflowoutput.server|safe }}</td>
+            <td>{{ workflowoutput.stage|safe }}</td>
+            <td>{{ workflowoutput.stdout|length }} bytes</td>
+            <td>{{ workflowoutput.stderr|length }} bytes</td>
+            <td>{{ workflowoutput.stdin|length }} bytes</td>
+            <td>{{ workflowoutput.retval }}</td>
+            <td>{{ workflowoutput.date }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

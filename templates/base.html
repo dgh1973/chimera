@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<div id="top">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <script type="text/javascript" src="/chimera_media/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/chimera_media/main.css" />
+    <!-- <meta http-equiv="refresh" content="900"> -->
+</head>
+<div id="top-bar">
+    <table>
+        <tr>
+            <td>
+                <ul class="menu-button"><a href="javascript:void(0)" onClick="MoveElement('dropdown', '-1px', '-300px')"><img src="/chimera_media/images/menu.png" alt=""/></a>
+                    <li id="dropdown" class="rounded">
+                        <ul class="dropdown-menu">
+                            <li><a href="/chimera/servers">Servers</a></li>
+                            <li><a href="/chimera/serverenv">Server Environment</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/files">Files</a></li>
+                            <li><a href="/chimera/filedeltas">File Deltas</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/workflows">Workflows</a></li>
+                            <li><a href="/chimera/workflows/parts">Workflow Parts</a></li>
+                            <li><a href="/chimera/workflows/schedules">Workflow Schedules</a></li>
+                            <li><a href="/chimera/workflows/output">Workflow Outputs</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/tags">Tags</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/notes">Notes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td><h2><a href="/chimera">ChiMeRA</a></h2><span class="title_comment">Configuration Management & Remote Administration</span></td>
+        </tr>
+    </table>
+</div>
+<div id="content" class="rounded">
+<h4>{% block right_title %}{% endblock %}</h4>
+<body onLoad="document.forms.search_form.search.focus()">
+<table id="top-right-table">
+    {% block top_right_table %}{% endblock %}
+</table>
+{% if list %}
+    <div class="util-link">
+        {% if pages.has_previous %}
+            <a href="?page=1">first</a>
+            <a href="?page={{ pages.previous_page_number }}">prev</a>
+        {% else %}
+            first prev
+        {% endif %}
+        &lt;{{ pages.start_index }} - {{ pages.end_index }} of {{ count }}&gt;
+        {% if pages.has_next %}
+            <a href="?page={{ pages.next_page_number }}">next</a>
+            <a href="?page={{ page_total }}">last</a>
+        {% else %}
+            next last
+        {% endif %}
+    </div>
+    <hr>
+    {% block bottom_right_content %}{% endblock %}
+    <hr>
+    <div class="util-link">
+        {% if pages.has_previous %}
+        {% if qs %}
+        <a href="?search={{ qs }}&page=1">first</a>
+        <a href="?search={{ qs }}&page={{ pages.previous_page_number }}">prev</a>
+        {% else %}
+        <a href="?page=1">first</a>
+        <a href="?page={{ pages.previous_page_number }}">prev</a>
+        {% endif %}
+        {% else %}
+            first prev
+        {% endif %}
+        &lt;{{ pages.start_index }} - {{ pages.end_index }} of {{ count }}&gt;
+        {% if pages.has_next %}
+        {% if qs %}
+        <a href="?search={{ qs }}&page={{ pages.next_page_number }}">next</a>
+        <a href="?search={{ qs }}&page={{ page_total }}">last</a>
+        {% else %}
+        <a href="?page={{ pages.next_page_number }}">next</a>
+        <a href="?page={{ page_total }}">last</a>
+        {% endif %}
+        {% else %}
+            next last
+        {% endif %}
+    </div>
+{% else %}
+<hr>
+    <p>Nothing to see here...</p>
+<hr>
+{% endif %}
+</body>
+</div>
+</html>
+

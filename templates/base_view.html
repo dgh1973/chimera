@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<div id="top">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <script type="text/javascript" src="/chimera_media/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/chimera_media/main.css" />
+</head>
+<div id="top-bar">
+    <table>
+        <tr>
+            <td>
+                <ul class="menu-button"><a href="javascript:void(0)" onClick="MoveElement('dropdown', '-1px', '-300px')"><img src="/chimera_media/images/menu.png" alt=""/></a>
+                    <li id="dropdown" class="rounded">
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/chimera/servers">Servers</a></li>
+                            <li><a href="/chimera/serverenv">Server Environment</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/files">Files</a></li>
+                            <li><a href="/chimera/filedeltas">File Deltas</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/workflows">Workflows</a></li>
+                            <li><a href="/chimera/workflows/parts">Workflow Parts</a></li>
+                            <li><a href="/chimera/workflows/schedules">Workflow Schedules</a></li>
+                            <li><a href="/chimera/workflows/output">Workflow Output</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/tags">Tags</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/chimera/notes">Notes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td><h2><a href="/chimera">ChiMeRA</a></h2><span class="title_comment">Configuration Management & Remote Administration</span></td>
+        </tr>
+    </table>
+</div>
+<div id="content" class="rounded">
+<h4>{% block right_title %}{% endblock %}</h4>
+<p>
+    <table>
+        {% block top_right_table %}{% endblock %}
+    </table>
+</p>
+<hr>
+{% block bottom_right_content %}{% endblock %}
+<hr>
+<a href="#top" class="util-link">Back to top</a>
+</div>
+</html>
+

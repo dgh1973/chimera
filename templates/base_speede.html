@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}SPEEDE Registry{% endblock %}
+{% block right_title %}
+{% if qs %}
+    SPEEDE accounts with keywords "{{ qs|safe }}" ({{ count|safe }} results)
+{% else %}
+    SPEEDE Registry ({{ count|safe }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/speedereg/search/">
+            <input type="text" name="search" />
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+<!--    <td>
+        <form method="post" action="/chimera/speedereg/new/">
+            <input type="submit" value="New Entity" />
+        </form>
+    </td>
+-->
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+  <table id="minimal-table">
+    <tr>
+        <th>Key Code</th>
+        <th>Name</th>
+        <th>State</th>
+        <th>Override</th>
+        <th>Contact</th>
+        <th>Phone #</th>
+        <th>Email</th>
+        <th>Delivery Time</th>
+        <th>Last Receipt</th>
+        <th>Last Delivery</th>
+        <th>FTP Retries</th>
+        <th>Vendor</th>
+        <th>Prod</th>
+        <th>Report</th>
+    </tr>
+{% for entity in list %}
+    <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+          onclick="DoNav('/chimera/speedereg/view/{{ entity.urlsafe_key_code }}/')">
+        <td>{{ entity.key_code|safe }}</td>
+        <td>{{ entity.name|safe }}</td>
+        <td>{{ entity.state|safe }}</td>
+        <td>{{ entity.override_dest|safe }}</td>
+        <td>{{ entity.contact|safe }}</td>
+        <td>{{ entity.phone|safe }}</td>
+        <td>{{ entity.ack_email|safe }}</td>
+        <td>{{ entity.delive_time|safe }}</td>
+        <td>{{ entity.last_rec_date|safe }}</td>
+        <td>{{ entity.last_del_date|safe }}</td>
+        <td>{{ entity.ftp_retries|safe }}</td>
+        <td>{{ entity.vendor|safe }}</td>
+        {% if entity.rec_prod == "Y" %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+        {% if entity.suppress_sw == "N" %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+      </tr>
+{% endfor %}
+</table>
+{% endblock %}

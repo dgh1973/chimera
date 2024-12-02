@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Servers{% endblock %}
+{% block right_title %}
+{% if qs %}
+    Servers with keywords "{{ qs|safe }}" ({{ count|safe }} results)
+{% else %}
+    Servers ({{ count|safe }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/servers/search/">
+            <input type="text" name="search" />
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/servers/new/">
+            <input type="submit" value="New Server" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+  <table id="minimal-table">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>External Address</th>
+        <th>LB Address</th>
+        <th>OS</th>
+        <th>CPU</th>
+        <th>RAM</th>
+        <th>Desc</th>
+        <th>Make & Model</th>
+        <th>Updated</th>
+        <th>Enabled</th>
+    </tr>
+{% for server in list %}
+    <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+          onclick="DoNav('/chimera/servers/view/{{ server.id }}/')">
+        <td>{{ server.name|safe }}</td>
+        <td>{{ server.address|safe }}</td>
+        <td>{{ server.e_addr|safe }}</td>
+        <td>{{ server.v_addr|safe }}</td>
+        <td>{{ server.os|safe }}</td>
+        <td>{{ server.cpu_speed|safe }} ({{ server.cpu_cores|safe }})</td>
+        <td>{{ server.ram|safe }}</td>
+        <td>{{ server.description|safe }}</td>
+        <td>{{ server.make_model|safe }}</td>
+        <td>{{ server.updated }}</td>
+        {% if server.enabled %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+      </tr>
+{% endfor %}
+</table>
+{% endblock %}

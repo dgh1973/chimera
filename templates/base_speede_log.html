@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}SPEEDE Logs{% endblock %}
+{% block right_title %}
+{% if qs %}
+    SPEEDE log entries with keywords "{{ qs|safe }}" ({{ count|safe }} results)
+{% else %}
+    SPEEDE Logs ({{ count|safe }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="get" action="/chimera/speedelog/search/">
+            <input type="text" name="search" />
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+  <table id="minimal-table">
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Source</th>
+        <th>Source Abbr.</th>
+        <th>Source State</th>
+        <th>Destination</th>
+        <th>Destination Abbr.</th>
+        <th>Destination State</th>
+        <th># of Records</th>
+        <th>Transction Type</th>
+        <th>Transaction Count</th>
+        <th>File</th>
+        <th>Delivery Type</th>
+        <th>Original File Name</th>
+        <th>Note</th>
+        <th>Source Name</th>
+        <th>Source Key Code</th>
+        <th>Source Codeset</th>
+    </tr>
+{% for entry in list %}
+    <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+          onclick="DoNav('/chimera/speedelog/view/{{ entry.urlsafe_key_code }}/')">
+        <td>{{ entry.date|safe }}</td>
+        <td>{{ entry.time|safe }}</td>
+        <td>{{ entry.status|safe }}</td>
+        <td>{{ entry.src|safe }}</td>
+        <td>{{ entry.src_abbr|safe }}</td>
+        <td>{{ entry.src_state|safe }}</td>
+        <td>{{ entry.dest|safe }}</td>
+        <td>{{ entry.dest_abbr|safe }}</td>
+        <td>{{ entry.dest_state|safe }}</td>
+        <td>{{ entry.num_recs|safe }}</td>
+        <td>{{ entry.tran_type|safe }}</td>
+        <td>{{ entry.tran_count|safe }}</td>
+        <td>{{ entry.file|safe }}</td>
+        <td>{{ entry.del_type|safe }}</td>
+        <td>{{ entry.orig_file_name|safe }}</td>
+        <td>{{ entry.note|safe }}</td>
+        <td>{{ entry.src_name|safe }}</td>
+        <td>{{ entry.src_code|safe }}</td>
+        <td>{{ entry.src_codeset|safe }}</td>
+
+      </tr>
+{% endfor %}
+</table>
+{% endblock %}

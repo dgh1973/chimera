@@ -1,0 +1,240 @@
+{% extends "base_view.html" %}
+{% block title %}{{ entity|safe }}{% endblock %}
+{% block right_title %}<a href="/chimera/speedereg/">SPEEDE Registry</a>&nbsp&gt&nbsp{{ entity|safe }}{% endblock %}
+{% block top_right_table %}
+<button onClick="DoNav('/chimera/speedereg/edit/{{ entity.urlsafe_key_code }}/')">
+    Edit
+</button>
+{% endblock %}
+{% block bottom_right_content %}
+<table id="info-table">
+    <tr>
+        <td class="title">KEY CODE</td>
+        <td>{{ entity.key_code|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">ABBREVIATION</td>
+        <td>{{ entity.abbr|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">NAME</td>
+        <td>{{ entity.name|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY TYPE</td>
+        <td>{{ entity.type|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">STATE</td>
+        <td>{{ entity.state|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">SUPPRESS REPORTS?</td>
+        <td>{{ entity.suppress_sw|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION OVERRIDE</td>
+        <td>{{ entity.override_dest|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">SPEEDE/EXPRESS</td>
+        <td>{{ entity.speed_express|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">CONTACT</td>
+        <td>{{ entity.contact|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">PHONE</td>
+        <td>{{ entity.phone|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">RECEIVE PRODUCTION?</td>
+        <td>{{ entity.rec_prod|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">PGP ID</td>
+        <td>{{ entity.pgp|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">PGP REQUIRED?</td>
+        <td>{{ entity.pgp_required|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY TIME</td>
+        <td>{{ entity.delive_time|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">SEND ACKNOWLEDGEMENTS?</td>
+        <td>{{ entity.ack_flag|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">ACKNOWLEDGEMENT EMAIL</td>
+        <td>{{ entity.ack_email|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL</td>
+        <td>{{ entity.del_email|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (EXPRESS)</td>
+        <td>{{ entity.del_email_express|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (TESTING)</td>
+        <td>{{ entity.del_email_test|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (APPLICATIONS)</td>
+        <td>{{ entity.del_email_app|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (TEST SCORES)</td>
+        <td>{{ entity.del_email_scroes|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (XML)</td>
+        <td>{{ entity.del_email_xml|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DELIVERY EMAIL (XML to EDI)</td>
+        <td>{{ entity.del_email_xml_to_edi|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DUMMY FIELD 1</td>
+        <td>{{ entity.dummy1|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DUMMY FIELD 2</td>
+        <td>{{ entity.dummy2|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">MIME</td>
+        <td>{{ entity.mime|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">MACHINE</td>
+        <td>{{ entity.machine|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">USER ID</td>
+        <td>{{ entity.userid|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">PASSWORD (FTP/S)</td>
+        <td>{{ entity.password|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">UPLOAD DIRECTORY</td>
+        <td>{{ entity.dir|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">ACCT</td>
+        <td>{{ entity.acct|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE</td>
+        <td>{{ entity.dest_file|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE (EXPRESS)</td>
+        <td>{{ entity.dest_file_express|safe }}</td>
+    </tr>
+        <tr>
+        <td class="title">DESTINATION FILE (TEST)</td>
+        <td>{{ entity.dest_file_test|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE (APPLICATIONS)</td>
+        <td>{{ entity.dest_file_app|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE (SCORES)</td>
+        <td>{{ entity.dest_file_scores|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE (XML)</td>
+        <td>{{ entity.dest_file_xml|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DESTINATION FILE (XML to EDI)</td>
+        <td>{{ entity.dest_file_xml_to_edi|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DUMMY FIELD 3</td>
+        <td>{{ entity.dummy3|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DUMMY FIELD 4</td>
+        <td>{{ entity.dummy4|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">APPEND?</td>
+        <td>{{ entity.append|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">INCOMING ACCOUNT</td>
+        <td>{{ entity.incoming_addr|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LINE TERMINATION</td>
+        <td>{{ entity.line_term|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">BLOCKING</td>
+        <td>{{ entity.blocking|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">COMPRESS?</td>
+        <td>{{ entity.compress_sw|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LAST RECEIVE DATE</td>
+        <td>{{ entity.last_rec_date|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LAST RECEIVE TIME</td>
+        <td>{{ entity.last_rec_time|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LAST DELIVERY DATE</td>
+        <td>{{ entity.last_del_date|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LAST DELIVERY TIME</td>
+        <td>{{ entity.last_del_time|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">FTP RETRIES</td>
+        <td>{{ entity.ftp_retries|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">TOTAL DELIVERIES</td>
+        <td>{{ entity.total_deliveries|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">DATE ADDED</td>
+        <td>{{ entity.date_added|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">LAST UPDATED</td>
+        <td>{{ entity.last_updated|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">VENDOR</td>
+        <td>{{ entity.vendor|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">NOTES</td>
+        <td>{{ entity.notes|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">FORMAT TYPE</td>
+        <td>{{ entity.format_type|safe }}</td>
+    </tr>
+    <tr>
+        <td class="title">EDI XML TRANSLATED</td>
+        <td>{{ entity.edi_xml_translated|safe }}</td>
+    </tr>
+</table>
+{% endblock %}

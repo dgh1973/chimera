@@ -1,0 +1,19 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit Server{% endblock %}
+{% block right_title %}<a href="/chimera/servers/">Servers</a>&nbsp&gt&nbsp{{ server|safe }}{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/servers/submit/{{ server.id }}/">
+            <input type="submit" value="Save" />
+            <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/servers/delete/{{ server.id }}/'" />
+            <input type="button" onClick="location.href='/chimera/servers/view/{{ server.id }}/'" value="View" />
+        <p>
+            <hr>
+            <table id="box-table">
+                {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}

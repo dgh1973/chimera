@@ -1,0 +1,8 @@
+{% extends "base_view.html" %}
+{% block right_title %}<a href="/chimera/filedeltas/">File Deltas</a>&nbsp&gt&nbsp{{ filedelta }}{% endblock %}
+{% block top_right_table %}
+<!-- <input type="button" value="Revert" onClick="if(confirm('Revert this delta?')) location.href='/chimera/filedeltas/revert/{{ filedelta.id }}/'" /> -->
+{% endblock %}
+{% block bottom_right_content %}
+    <pre>{{ filedelta.content }}</pre>
+{% endblock %}

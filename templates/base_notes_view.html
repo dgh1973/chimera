@@ -1,0 +1,12 @@
+{% extends "base_view.html" %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block right_title %}<a href="/chimera/notes/">Notes</a>&nbsp&gt&nbsp{{ note|safe }}{% endblock %}
+{% block top_right_table %}
+<button onClick="DoNav('/chimera/notes/edit/{{ note.id }}/')">
+    Edit
+</button>
+{% endblock %}
+{% block bottom_right_content %}
+<!-- <pre>{{ note.content|wordwrap:120 }}</pre> -->
+<pre>{{ note.content }}</pre>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base_refresh.html" %}
+{% block title %}Files{% endblock %}
+{%block right_title %}
+{% if qs %}
+    Files with keywords "{{ qs|safe }}" ({{ count }} results)
+{% else %}
+    Files ({{ count }})
+{% endif %}
+{% endblock %}
+{% block top_right_table %}
+<tr>
+    <td>
+        <form name="search_form" method="post" action="/chimera/files/search/">
+            <input type="text" name="search"/>
+            <input type="submit" name="button" value="Search" />
+        </form>
+    </td>
+    <td>
+        <form method="post" action="/chimera/files/new/">
+            <input type="submit" value="New File" />
+        </form>
+    </td>
+</tr>
+{% endblock %}
+{% block bottom_right_content %}
+    <table id="minimal-table">
+        <tr>
+            <th>Server</th>
+            <th>Path</th>
+            <th>Owner</th>
+            <th>Group</th>
+            <th>Mode</th>
+            <th>Size</th>
+            <th>Update</th>
+            <th>Canonical</th>
+            <th>Workflow</th>
+        </tr>
+    {% for file in list %}
+        <tr onmouseover="ChangeColor(this, '#CDF', true);"
+          onmouseout="ChangeColor(this, '#FFF', false);"
+            onclick="DoNav('/chimera/files/view/{{ file.id }}/')">
+            <td>{{ file.server|safe }}</td>
+            <td>{{ file.path|safe }}</td>
+            <td>{{ file.owner|safe }}</td>
+            <td>{{ file.group|safe }}</td>
+            <td>{{ file.mode|safe }}</td>
+            <td>{{ file.content|length|safe }}</td>
+            <td>{{ file.get_uinterval_display|safe }}</td>
+        {% if file.canonical %}
+            <td><img border="0" src="/chimera_media/images/enabled.png"></td>
+        {% else %}
+            <td><img border="0" src="/chimera_media/images/disabled.png"></td>
+        {% endif %}
+            <td>{{ file.workflow|safe }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

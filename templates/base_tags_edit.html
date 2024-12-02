@@ -1,0 +1,18 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit Tag{% endblock %}
+{% block right_title %}<a href="/chimera/tags/">Tags</a>&nbsp&gt&nbsp{{ tag|safe }}{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/tags/submit/{{ tag.id }}/">
+        <input type="submit" value="Save" />
+        <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/tags/delete/{{ tag.id }}/'" />
+        <p>
+            <hr>
+            <table id="box-table">
+                {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}

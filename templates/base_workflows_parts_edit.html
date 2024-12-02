@@ -1,0 +1,18 @@
+{% extends "base_edit.html" %}
+{% block title %}Edit Workflow Part{% endblock %}
+{% block right_title %}<a href="/chimera/workflows/parts/">Workflow Parts</a>&nbsp&gt&nbsp{{ workflowpart|safe }}{% endblock %}
+{% block bottom_right_content %}
+<p>
+    <form method="post" action="/chimera/workflows/submitpart/{{ workflowpart.id }}/">
+        <input type="submit" value="Save" />
+        <input type="button" value="{{ undo }}" onClick="if(confirm('Are you sure?')) location.href='/chimera/workflows/deletepart/{{ workflowpart.id }}/'" />
+        <p>
+            <hr>
+            <table id="box-table">
+                {{ form }}
+            </table>
+            <hr>
+        </p>
+    </form>
+</p>
+{% endblock %}
